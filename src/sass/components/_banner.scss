@@ -1,0 +1,104 @@
+.banner {
+  z-index: 40;
+  position: relative;
+  .banner-row {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    @media (max-width: $layout-breakpoint-medium) {
+      &:first-child {
+        margin-top: 48px;
+      }
+    }
+    &.center {
+      justify-content: center;
+      text-align: center;
+      .row-letter {
+        left: 0;
+      }
+    }
+    &.right {
+      justify-content: flex-end;
+    }
+    .row-title,
+    .row-letter {
+      position: relative;
+      display: inline-block;
+      white-space: nowrap;
+    }
+    .row-col {
+      width: 50%;
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      @media (max-width: $layout-breakpoint-medium) {
+        width: 70%;
+      }
+      @media (max-width: 1240px) {
+        &:last-child {
+          display: none;
+        }
+      }
+      @media (max-width: $layout-breakpoint-xsmall) {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+    .scroll {
+      height: 160px;
+      width: 160px;
+      border-radius: 100%;
+      background: $white;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      left: 160px;
+      @media (max-width: $layout-breakpoint-medium) {
+        left: 60px;
+      }
+      @media (max-width: 1240px) {
+        display: none;
+      }
+      span {
+        margin: 4px 0;
+        @media (max-width: $layout-breakpoint-xsmall) {
+          margin: 2px 0;
+        }
+      }
+    }
+  }
+}
+
+.transition-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 800px;
+    display: flex;
+  }
+  &.final {
+    display: block;
+    top:-5060rem;
+    // left:500%;
+    // transform: translate(-50% , -5%);
+    position: absolute;
+    width: 50%;
+    margin: 0 auto;
+    z-index: -100;
+    @media (max-width: $layout-breakpoint-xsmall) {
+      top: -506rem;
+    }
+    img {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+}
