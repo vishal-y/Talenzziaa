@@ -7,12 +7,12 @@ import Wheel from './Wheel';
 import PropTypes from 'prop-types';
 
 
-const RIGHT_BOUNDARY = 15;
-const RIGHT_SPAWN_POINT = 14;
-const LEFT_BOUNDARY = -15;
-const LEFT_SPAWN_POINT = -14;
-const FORWARD_BOUNDARY = 12;
-const BACKWARD_BOUNDARY = -22;
+// const RIGHT_BOUNDARY = 15;
+// const RIGHT_SPAWN_POINT = 14;
+// const LEFT_BOUNDARY = -15;
+// const LEFT_SPAWN_POINT = -14;
+// const FORWARD_BOUNDARY = 12;
+// const BACKWARD_BOUNDARY = -22;
 
 const Vehicle = ({ radius = 0.7, width = 1.2, height = 0.3, front = 1.3, back = -1.15, steer = 0.6, force = 3000, maxBrake = 1e5, position, ...props }) => {
   const chassis = useRef();
@@ -71,33 +71,33 @@ const Vehicle = ({ radius = 0.7, width = 1.2, height = 0.3, front = 1.3, back = 
     console.log(vehiclePos, 'vehicle');
   };
 
-  useFrame(() => {
-    if (vehiclePos.current[0] > RIGHT_BOUNDARY) {
-      chassis.current.api.position.set(LEFT_SPAWN_POINT, vehiclePos.current[1], 0);
-      chassis.current.api.velocity.set(0, 0, 0);
-      chassis.current.api.angularVelocity.set(0, 0.5, 0);
-      return;
-    }
+  // useFrame(() => {
+  //   if (vehiclePos.current[0] > RIGHT_BOUNDARY) {
+  //     chassis.current.api.position.set(LEFT_SPAWN_POINT, vehiclePos.current[1], 0);
+  //     chassis.current.api.velocity.set(0, 0, 0);
+  //     chassis.current.api.angularVelocity.set(0, 0.5, 0);
+  //     return;
+  //   }
 
-    if (vehiclePos.current[0] < LEFT_BOUNDARY) {
-      chassis.current.api.position.set(RIGHT_SPAWN_POINT, vehiclePos.current[1], 0);
-      chassis.current.api.velocity.set(0, 0, 0);
-      chassis.current.api.angularVelocity.set(0, 0.5, 0);
-      return;
-    }
-    if (vehiclePos.current[2] > FORWARD_BOUNDARY) {
-      chassis.current.api.position.set(0, 0.5, -18);
-      chassis.current.api.velocity.set(0, 0, 0);
-      chassis.current.api.angularVelocity.set(0, vehiclePos.current[1], 0);
-      return;
-    }
-    if (vehiclePos.current[2] < BACKWARD_BOUNDARY) {
-      chassis.current.api.position.set(0, 0.5, 8);
-      chassis.current.api.velocity.set(0, 0, 0);
-      chassis.current.api.angularVelocity.set(0, vehiclePos.current[1], 0);
-      return;
-    }
-  });
+  //   if (vehiclePos.current[0] < LEFT_BOUNDARY) {
+  //     chassis.current.api.position.set(RIGHT_SPAWN_POINT, vehiclePos.current[1], 0);
+  //     chassis.current.api.velocity.set(0, 0, 0);
+  //     chassis.current.api.angularVelocity.set(0, 0.5, 0);
+  //     return;
+  //   }
+  //   if (vehiclePos.current[2] > FORWARD_BOUNDARY) {
+  //     chassis.current.api.position.set(0, 0.5, -18);
+  //     chassis.current.api.velocity.set(0, 0, 0);
+  //     chassis.current.api.angularVelocity.set(0, vehiclePos.current[1], 0);
+  //     return;
+  //   }
+  //   if (vehiclePos.current[2] < BACKWARD_BOUNDARY) {
+  //     chassis.current.api.position.set(0, 0.5, 8);
+  //     chassis.current.api.velocity.set(0, 0, 0);
+  //     chassis.current.api.angularVelocity.set(0, vehiclePos.current[1], 0);
+  //     return;
+  //   }
+  // });
 
   // useFrame(() => {
   //   if (vehiclePos.current[0] > RIGHT_BOUNDARY) {

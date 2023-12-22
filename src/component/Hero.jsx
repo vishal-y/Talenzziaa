@@ -79,7 +79,7 @@ export default function Hero() {
   return (
     <div className="">
 
-      <div className="hidden xl:flex mt-10 h-[screen] border flex-col justify-center items-center ">
+      <div className="hidden xl:flex mt-10 h-[screen] flex-col justify-center items-center ">
 
         <motion.p
           initial={{ x: 100 }}

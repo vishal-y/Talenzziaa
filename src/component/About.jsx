@@ -12,7 +12,7 @@ export default function About() {
   },[show])
 
   return (
-    <div className=''>
+    <div id='about' className=''>
 
      <div className='hidden md:flex justify-center items-center'>
 

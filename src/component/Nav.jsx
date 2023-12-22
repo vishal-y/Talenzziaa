@@ -1,29 +1,36 @@
 import { useMotionValue, motion } from "framer-motion";
-import  {  useRef } from "react";
+import { useState, useRef } from "react";
 import PropTypes from 'prop-types';
 
 
-export default function Nav () {
+export default function Nav() {
+
+  const [show, setShow] = useState(true)
 
   return (
-    <motion.section animate={{width : "100vw" }} transition={{ ease: [0.6, 0.01, 0.05, 0.9], duration: 1.6 }} className="bg-[#faf1e8] ">
-      <motion.div initial={{opacity : 0}} animate={{opacity : [0 , 0 , 0.1 , 0.4 , 0.6 , 0.8 , 1]}} transition={{duration : 3}} className="mx-auto gap-6  -rotate-90">
-        <Link
-          heading="Home"
-          href="#"
-        />
-        <Link
-          heading="About"
-          href="#"
-        />
-        <Link
-          heading="Events"
-          href="#"
-        />
-        <Link
-          heading="Team"
-          href="#"
-        />
+    <motion.section animate={{ width: "100vw" }} transition={{ ease: [0.6, 0.01, 0.05, 0.9], duration: 1.6 }} className={show ? "bg-[#faf1e8] block h-screen" : "hidden"}>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: [0, 0, 0.1, 0.4, 0.6, 0.8, 1] }} transition={{ duration: 3 }} className="mx-auto gap-6  -rotate-90">
+
+        <div 
+        onClick={()=>{setShow(!show)}}>
+          <NavLink heading="Home" href="#home"/>
+        </div>
+
+        <div 
+        onClick={()=>{setShow(!show)}}>
+          <NavLink heading="About" href="#about"/>
+        </div>
+
+        <div 
+        onClick={()=>{setShow(!show)}}>
+        <NavLink heading="Events" href="#events" />
+        </div>
+
+        <div 
+        onClick={()=>{setShow(!show)}}>
+        <NavLink heading="Team" href="#team" />
+        </div>
+
       </motion.div>
     </motion.section>
   );
@@ -33,7 +40,7 @@ export default function Nav () {
 
 
 
-const Link = ({ heading, href }) => {
+const NavLink = ({ heading, href }) => {
   const ref = useRef(null);
 
   const x = useMotionValue(0);
@@ -69,7 +76,7 @@ const Link = ({ heading, href }) => {
         <motion.span
           variants={{
             initial: { x: 0 },
-            whileHover: { x: 130 , rotate : "90deg" },
+            whileHover: { x: 130, rotate: "90deg" },
           }}
           transition={{
             type: "spring",
@@ -93,15 +100,14 @@ const Link = ({ heading, href }) => {
           ))}
 
 
-          
+
         </motion.span>
       </div>
 
     </motion.a>
   );
 };
-Link.propTypes = {
-    heading: PropTypes.string.isRequired,
-    href: PropTypes.string.isRequired,
-  };
-  
+NavLink.propTypes = {
+  heading: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
+};

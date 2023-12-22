@@ -12,7 +12,7 @@ import Events from "./component/Events";
 import All from './threeDcomp/All'
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     loading
@@ -38,9 +38,10 @@ function App() {
           <SuperMarquee/>
 
           {/* <Horcar/> */}
-          <Events/>/
+          <Events/>
           <All/>
 
+          
           {/* <SVGMaskEffect/> */}
           {!loading && (
             <motion.div
@@ -62,6 +63,3 @@ function App() {
 
 export default App;
 
-
-
-// https://codepen.io/uzitrake/pen/XWOoxGBc

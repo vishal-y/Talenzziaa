@@ -72,17 +72,11 @@ const Header = () => {
 
   const [show , setShow] = useState(false)
 
-  function hide(){
-    document.body.style.overflow = "hidden"
-  }
 
-  function vis(){
-    document.body.style.overflowY = "visible"
-  }
 
   useEffect(()=>{
+
     const button = document.getElementById("button");
-    show ?  hide() : vis();
 
   button.onclick = () => {
     button.classList.toggle("toggled");
@@ -112,9 +106,9 @@ const Header = () => {
          <Button/>
         </div> */}
 
-        <div className='z-[100] ' onClick={()=>{setShow(!show)}}>
+        <div className= 'z-[100]' onClick={()=>{setShow(!show)}}>
           <button id="button">
-            <div id="icon"></div>
+            <div id="icon"></div> 
           </button>
         </div>
         
