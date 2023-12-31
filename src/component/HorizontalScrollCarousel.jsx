@@ -14,10 +14,11 @@ export default function Horcar() {
 const HorizontalScrollCarousel = () => {
   const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({
-    target: targetRef,
+    target: targetRef, 
   });
 
   const x = useTransform(scrollYProgress, [0, 1], ["10%", "-185%"]);
+  
 
   useEffect(()=>{
     const track = document.getElementById("image-track");
@@ -31,8 +32,7 @@ track.dataset.prevPercentage = track.dataset.percentage;
 
 const handleOnMove = e => {
 if(track.dataset.mouseDownAt === "0") return;
-
-const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
+ const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
     maxDelta = window.innerWidth / 2;
 
 const percentage = (mouseDelta / maxDelta) * -100,

@@ -7,9 +7,10 @@ import Hero from "./component/Hero";
 import About from "./component/About";
 import SuperMarquee from "./component/SuperMarquee";
 import Events from "./component/Events";
-// import { SVGMaskEffect } from "./component/SvgMaskEffect";
+import { SVGMaskEffect } from "./component/SvgMaskEffect";
 // import Horcar from "./component/HorizontalScrollCarousel";
 import All from './threeDcomp/All'
+import Footer from "./component/Footer";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -22,7 +23,6 @@ function App() {
       // scrollTo(0, 100)
 
   }, [loading]);
-
 
   return (
     <AnimatePresence>
@@ -39,10 +39,11 @@ function App() {
 
           {/* <Horcar/> */}
           <Events/>
+          <SVGMaskEffect/>    
           <All/>
 
           
-          {/* <SVGMaskEffect/> */}
+          <Footer/>
           {!loading && (
             <motion.div
               className='transition-image final'

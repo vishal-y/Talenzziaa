@@ -23,7 +23,7 @@ export function useControls() {
   useKeyPress(['s'], (pressed) => (keys.current.backward = pressed));
   useKeyPress(['a'], (pressed) => (keys.current.left = pressed));
   useKeyPress(['d'], (pressed) => (keys.current.right = pressed));
-  useKeyPress([' '], (pressed) => (keys.current.brake = pressed));
+  useKeyPress(['v'], (pressed) => (keys.current.brake = pressed));
   useKeyPress(['r'], (pressed) => (keys.current.reset = pressed));
   useKeyPress(['t'], (pressed) => (keys.current.test = pressed));
 

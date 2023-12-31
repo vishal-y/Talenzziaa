@@ -1,66 +1,309 @@
+import { useState } from 'react';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+import firebaseConfig from '../fireConfig';
 
-export default function Form() {
+
+firebase.initializeApp(firebaseConfig)
+
+const Form = () => {
+
+  const [store, setStore] = useState(true)
+  const [dbcollection , setDbcollection] = useState('none')
+
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    collegeName: '',
+    receiveEmails: false,
+    isPaid: false,
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const isValidEmail = (email) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    };
+
+    
+    try {
+      console.log("dbcollection is " ,dbcollection)
+
+      if (!formData.firstName) {
+        console.log("df failed ")
+        let inp = document.getElementById("firstName")
+        inp.style.border = "2px solid red";
+        setTimeout(() => {
+          inp.style.border = "2px solid black";
+        }, 3000);
+        setStore(false)
+      }
+
+      if (!formData.lastName) {
+        console.log("da failed ")
+        let inp = document.getElementById("lastName")
+        inp.style.border = "2px solid red";
+        setTimeout(() => {
+          inp.style.border = "2px solid black";
+        }, 3000);
+        setStore(false)
+      }
+
+      // Validate email
+      if (!isValidEmail(formData.email)) {
+        console.log("email failed ")
+        let inp = document.getElementById("email")
+        inp.style.border = "2px solid red";
+        setTimeout(() => {
+          inp.style.border = "2px solid black";
+        }, 3000);
+        setStore(false)
+      }
+
+      if (dbcollection=='none') {
+        console.log("select event name ")
+        let inp = document.getElementById("eventName")
+        inp.style.border = "2px solid red";
+        setTimeout(() => {
+          inp.style.border = "2px solid black";
+        }, 3000);
+        setStore(false)
+      }
+
+      if (!formData.collegeName) {
+        console.log("college failed ")
+        let inp = document.getElementById("collegeName")
+        inp.style.border = "2px solid red";
+        setTimeout(() => {
+          inp.style.border = "2px solid black";
+        }, 3000);
+        setStore(false)
+      }
+
+      if (!formData.phone) {
+        let inp = document.getElementById("phone")
+        inp.style.border = "2px solid red";
+        setTimeout(() => {
+          inp.style.border = "2px solid black";
+        }, 3000);
+        console.log("phone failed")
+        setStore(false)
+      }
+
+      console.log("store : " , store)
+      if (store && dbcollection!='none') {
+        const db = firebase.firestore();
+
+        await db.collection(dbcollection).add(formData);
+
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          collegeName: '',
+          receiveEmails: false,
+          isPaid: false
+        });
+
+        console.log('Data successfully saved to Firestore!');
+      }
+      else{
+        console.log("unexpected")
+      }
+
+      console.log('kya pata')
+
+    } catch (error) {
+      console.error('Error saving data to Firestore:', error);
+    }
+  };
+
+
   return (
-    <div>
+    <div id="eventMain" className="flex">
+      <div className="event">
+        <div className="container">
+          <p className="event-date">JAN 20, 2024</p>
+          <h1 className="event-title">TALENZZIAA 16</h1>
+          <p className="event-info">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis aliquam esse iure aperiam, hic deserunt.
+            <br />
+          </p>
 
-       <p className=" relative top-[2rem] text-lg left-[85%]">from no : <span className="text-2xl relative top-1">01</span> </p>
+          <form action="" className="reg-form" onSubmit={handleSubmit}>
+            <h2 className="form-heading">Join the event</h2>
+            <div className="row">
+              <div className="col">
+                <label htmlFor="firstName">First name</label>
+                <input
+                required
+                  type="text"
+                  name="firstName"
+                  id="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  placeholder="Enter your first name"
+                />
+              </div>
+              <div className="col">
+                <label htmlFor="lastName">Last name</label>
+                <input
+                required
+                  type="text"
+                  name="lastName"
+                  id="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  placeholder="Enter your last name"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col">
+                <label htmlFor="email">Email</label>
+                <input
+                required
+                  type="email"
+                  name="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Enter your email"
+                />
+              </div>
 
-<div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
-  <div className="-mx-3 md:flex mb-6">
-    <div className="md:w-1/2 px-3 mb-6 md:mb-0">
-      <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="grid-first-name">
-        First Name
-      </label>
-      <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-first-name" type="text" placeholder="Vishal" />
-      <p className="text-red text-xs italic">Please fill out this field.</p>
-    </div>
-    <div className="md:w-1/2 px-3">
-      <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="grid-last-name">
-        Last Name
-      </label>
-      <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-last-name" type="text" placeholder="Yadav" />
-    </div>
-  </div>
-  <div className="-mx-3 md:flex mb-6">
-    <div className="md:w-full px-3">
-      <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="grid-password">
-        College name
-      </label>
-      <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="grid-password" type="text" placeholder="college name" />
-      <p className="text-grey-dark text-xs italic">Make sure to enter correct name </p>
-    </div>
-  </div>
-  <div className="-mx-3 md:flex mb-2">
-    <div className="md:w-1/2 px-3 mb-6 md:mb-0">
-      <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="grid-city">
-        City
-      </label>
-      <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-city" type="text" placeholder="Albuquerque" />
-    </div>
-    <div className="md:w-1/2 px-3">
-      <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="grid-state">
-        State
-      </label>
-      <div className="relative">
-        <select className="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-state">
-          <option>New Mexico</option>
-          <option>Missouri</option>
-          <option>Texas</option>
-        </select>
-        <div className="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
-          <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-        </div>
-      </div>
-    </div>
-    <div className="md:w-1/2 px-3">
-      <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="grid-zip">
-        Zip
-      </label>
-      <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-zip" type="text" placeholder="90210" />
-    </div>
-  </div>
+<div className="col">
+  <label htmlFor="eventName">Event</label>
+  <select name="eventName" id="eventName" value={formData.eventName} onChange={(e)=>{setDbcollection(e.target.value)}}>
+    <option  value="SELECT_EVENT">SELECT EVENT</option>
+    <option value="FAST_TYPING">Fast Typing</option>
+    <option value="CODE_DEBUG">Code Debug</option>
+  </select>
 </div>
 
+
+            </div>
+
+            <div className="row">
+              <div className="col">
+                <label htmlFor="phone">Phone No. </label>
+                <input
+                required
+                  type="tel"
+                  name="phone"
+                  id="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="+91 phone number"
+                  maxLength="10"
+                />
+              </div>
+
+              <div className="col">
+                <label htmlFor="collegeName">College Name</label>
+                <input
+                required
+                  type="collegeName"
+                  name="collegeName"
+                  id="collegeName"
+                  value={formData.collegeName}
+                  onChange={handleChange}
+                  placeholder="College name"
+                />
+              </div>
+            </div>
+
+            <div className="checkbox">
+              <input
+                type="checkbox"
+                name="receiveEmails"
+                id="receiveEmails"
+                checked={formData.receiveEmails}
+                onChange={handleChange}
+              />
+              <label htmlFor="receiveEmails">I would like to receive emails about Event updates</label>
+            </div>
+
+            <input
+              className="p-4 border mt-5 rounded-md bg-[#3a57fb] w-fit text-white shadow-2xl hover:scale-105"
+              type="submit"
+            />
+          </form>
+        </div>
+      </div>
+
+      <div className="sidebar ">
+        <div className="share">
+          <h4 className="heading">SHARE</h4>
+          <div className="social">
+            <a href="#">
+
+            </a>
+            <a href="#">
+
+            </a>
+            <a href="#">
+
+            </a>
+          </div>
+        </div>
+
+        <div className="guests">
+          <h4 className="heading">GUESTS</h4>
+          <div className="people">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg" alt="" className="people-image" />
+            <div className="people-info">
+              <h5 className="people-name">SOHAIL BHAI</h5>
+              <p className="designation">Lorem, ipsum.</p>
+            </div>
+          </div>
+
+          <div className="people">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg" alt="" className="guest-image" />
+            <div className="people-info">
+              <h5 className="people-name">SOHAIL BHAI</h5>
+              <p className="designation">Lorem, ipsum.</p>
+            </div>
+          </div>
+
+          <div className="people">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/005/545/335/small/user-sign-icon-person-symbol-human-avatar-isolated-on-white-backogrund-vector.jpg" alt="" className="people-image" />
+            <div className="people-info">
+              <h5 className="people-name">SOHAIL BHAI</h5>
+              <p className="designation">Lorem, ipsum.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="host">
+          <h4 className="heading">HOSTED BY</h4>
+
+          <div className="people">
+            <p>TOLANI COLLEGE</p>
+          </div>
+
+        </div>
+      </div>
+
     </div>
-  )
-}
+  );
+};
+
+export default Form;
+
+
+
+
