@@ -13,22 +13,22 @@ export default function Nav() {
 
         <div 
         onClick={()=>{setShow(!show)}}>
-          <NavLink heading="Home" href="#home"/>
+          <NavLink heading="ABOUT" href="#about"/>
         </div>
 
         <div 
         onClick={()=>{setShow(!show)}}>
-          <NavLink heading="About" href="#about"/>
+          <NavLink heading="EVENTS" href="#events"/>
         </div>
 
         <div 
         onClick={()=>{setShow(!show)}}>
-        <NavLink heading="Events" href="#events" />
+        <NavLink heading="TEAM" href="TEAM" />
         </div>
 
         <div 
         onClick={()=>{setShow(!show)}}>
-        <NavLink heading="Team" href="#team" />
+        <NavLink heading="REGISTER" href="/form" />
         </div>
 
       </motion.div>

@@ -76,14 +76,13 @@ const Header = () => {
 
   useEffect(()=>{
 
-    const button = document.getElementById("button");
-
+  const button = document.getElementById("button");
   button.onclick = () => {
     button.classList.toggle("toggled");
   }
-
-  })
   
+})
+
   return (
     <motion.div
       initial={{ opacity: 0, y: -180 }}
@@ -95,7 +94,7 @@ const Header = () => {
       }}
       className='header '>
 
-      <div className='header-inner flex sm:justify-evenly md:justify-between  items-center pt-10 lg:px-32'>
+      <div className=' header-inner flex sm:justify-evenly md:justify-between  items-center pt-10 lg:px-32'>
         
         <motion.img drag dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }} src={logo} alt="logo" className="rounded-full z-50 h-10 w-10 md:h-16 md:w-16" />
         <nav >

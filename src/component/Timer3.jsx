@@ -60,7 +60,7 @@ const Timer3 = () => {
 
   return (
     <div>
-        <div className="flex  justify-center md:gap-3 ">
+        <div className="flex text-white justify-center md:gap-3 ">
             
           <div className="flex gap-5 relative">
               <span className="  font-semibold text-sm md:text-xl text-[ #f0eff1]">

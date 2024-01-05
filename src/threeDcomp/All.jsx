@@ -7,7 +7,7 @@ import * as THREE from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 
-import myFont from '../../public/Oleo_Script_Regular.json'
+import myFont from '/Oleo_Script_Regular.json?url'
 
 const DEFAULT_LETTER_SPACING = 0.2;
 

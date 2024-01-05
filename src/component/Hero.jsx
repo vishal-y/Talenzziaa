@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import PropTypes from 'prop-types';
-
+// import bg from '/bg.mp4'
 
 const banner = {
   animate: {
@@ -77,7 +77,7 @@ Banner.propTypes = {
 export default function Hero() {
 
   return (
-    <div className="">
+    <div id="home" className="">
 
       <div className="hidden xl:flex mt-10 h-[screen] flex-col justify-center items-center ">
 
@@ -104,6 +104,8 @@ export default function Hero() {
         </svg>
 
       </div>
+
+    
 
 
       <div className="md:hidden mt-14 w-[100vw] ">
